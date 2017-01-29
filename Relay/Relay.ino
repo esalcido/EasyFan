@@ -7,7 +7,7 @@ void setup() {
 Serial.begin(9600);
 
 pinMode(RELAY1, OUTPUT);
-
+digitalWrite(RELAY1,1);
 }
 
 void loop() {
