@@ -7,6 +7,7 @@
   <version>1.0-SNAPSHOT</version>
   <name>EasyFan Maven Webapp</name>
   <url>http://maven.apache.org</url>
+
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
@@ -15,9 +16,9 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>com.efsavage.twitter.bootstrap</groupId>
-      <artifactId>bootstrap-maven</artifactId>
-      <version>2.3.1</version>
+      <groupId>org.webjars</groupId>
+      <artifactId>bootstrap</artifactId>
+      <version>3.3.1</version>
     </dependency>
     <dependency>
       <groupId>org.webjars</groupId>
@@ -25,14 +26,40 @@
       <version>1.4.7</version>
     </dependency>
     <dependency>
+      <groupId>org.webjars</groupId>
+      <artifactId>angular-ui-bootstrap</artifactId>
+      <version>2.2.0</version>
+    </dependency>
+    <dependency>
       <groupId>com.neuronrobotics</groupId>
       <artifactId>nrjavaserial</artifactId>
       <version>3.9.0</version>
     </dependency>
-
-
+    <dependency>
+      <groupId>org.eclipse.jetty</groupId>
+      <artifactId>jetty-server</artifactId>
+      <version>9.4.0.v20161208</version>
+    </dependency>
+    <dependency>
+      <groupId>org.codehaus.jackson</groupId>
+      <artifactId>jackson-mapper-asl</artifactId>
+      <version>1.9.13</version>
+    </dependency>
+    <dependency>
+      <groupId>com.sun.jersey</groupId>
+      <artifactId>jersey-server</artifactId>
+      <version>1.8</version>
+    </dependency>
   </dependencies>
+
   <build>
     <finalName>EasyFan</finalName>
+    <plugins>
+      <plugin>
+        <groupId>org.eclipse.jetty</groupId>
+        <artifactId>jetty-maven-plugin</artifactId>
+        <version>9.4.0.v20161208</version>
+      </plugin>
+    </plugins>
   </build>
 </project>
