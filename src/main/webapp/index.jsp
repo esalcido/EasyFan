@@ -42,7 +42,7 @@
       </div>
     </nav>
 
-<div class="container">
+<div class="container" >
 
       <div class="starter-template">
         <h1>Easy Fan</h1>
@@ -68,6 +68,16 @@
             </div> <pre><code>{{ bigData | json }}</code></pre>
             <p>State: {{state}}</p>
         </div>
+
+        <div id="temp-data" class="col-lg-12" >
+        <h3>DATA: </h3>
+        <pre><code>
+            <div id="temp" class="col-lg-6">temp: </div>
+            <div id="humidity" class="col-lg-6">humidity: </div>
+       </code> </pre>
+        </div>
+
+
       </div>
     </div><!-- /.container -->
 

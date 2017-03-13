@@ -38,20 +38,3 @@ $scope.$watch("bigData.fan", function(newVal,oldVal){
 
 });
 
-//if( $scope.bigData.fan){
-
-//}
-//else{
-//$http.get("/rest/toggle/1")
-//    .then(function(response){
-//        $scope.myWelcome = response.data.state;
-//
-//    });
-//}
-
-
-//turn on light
-//$scope.toggle = function( ){
-//
-//if(state =="0"){
-//    setTimeout(function(){$http.get("/rest/togg

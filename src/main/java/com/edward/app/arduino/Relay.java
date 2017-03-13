@@ -1,5 +1,6 @@
 package com.edward.app.arduino;
 
+import gnu.io.CommPortIdentifier;
 import gnu.io.NRSerialPort;
 
 import java.io.DataInputStream;
@@ -8,6 +9,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Enumeration;
 import java.util.Scanner;
 
 
@@ -22,94 +24,64 @@ public class Relay {
     private static String port;
     private static int baudRate;
 
-    public static void main(String [] args) {
+    private static SerialConnection serialCon;
 
-        //String port = "/dev/ttyUSB0";
-        port = "COM4";
-
-        baudRate = 9600;
-
-        String input;
-
-        serial = new NRSerialPort(port, baudRate);
-
-        Scanner sc = new Scanner(System.in);
-
-        do{
-            System.out.println(" Enter option ");
-            input = sc.next();
-
-        try {
-            toggle(input);
-
-
-        }catch(Exception e){}
-            //turn off
-        }while(! input.equalsIgnoreCase("x"));
-
-        //turn off when exiting
-        toggle("0");
-
-
-    }
+    private static final String PORT_NAMES[]={
+            "/dev/tty.usbserial-A9007UX1",
+            "/dev/ttyACM0",
+            "/dev/ttyUSB0",
+            "COM5",
+            "COM4",
+            "COM3",
+    };
 
     public Relay(){
-        port = "COM4";
+
+        //get port from system
+        CommPortIdentifier portId=null;
+        Enumeration portEnum =CommPortIdentifier.getPortIdentifiers();
+        CommPortIdentifier currPortId=null;
+        while(portEnum.hasMoreElements()){
+             currPortId = (CommPortIdentifier)portEnum.nextElement();
+            for(String portName: PORT_NAMES){
+                if(currPortId.getName().equals(portName)){
+                    portId = currPortId;
+                    break;
+                }
+            }
+        if(portId==null){
+            System.out.println("Unable to find COM port");
+
+        }
+        }
+
+
+       // port = "COM5";
+
+        port = currPortId.getName();
+        System.out.println("port");
         baudRate = 9600;
         serial = new NRSerialPort(port, baudRate);
 
-        toggle("0");
+
+        serialCon = new SerialConnection(ins,outs,serial, port,baudRate);
 
     }
 
     public static  void toggle(String state) {
-        serial.connect();
 
-        ins = new DataInputStream(serial.getInputStream());
-        outs = new DataOutputStream(serial.getOutputStream());
-        try {
-            byte [] buffer = new byte[4];
-//            int len= -1;
-//            while ((len = ins.read(buffer)) > -1) {
 
-               // String st = new String(buffer, 0, len);
-               // System.out.println(st);
+        serialCon.write(state);
 
-                outs.write(state.getBytes());
-                Thread.sleep(2000);
-
-           // }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        serial.disconnect();
     }
 
     //get state
     public static  int getState() {
-        serial.connect();
-        int result=0;
-        ins = new DataInputStream(serial.getInputStream());
-        outs = new DataOutputStream(serial.getOutputStream());
-        try {
-            byte [] buffer = new byte[4];
-            outs.write("2".getBytes());
-
-           result = ins.read(buffer);
-
-            System.out.println(result);
 
 
-            //Thread.sleep(2000);
-
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        serial.disconnect();
+        serialCon.write("2");
+        byte [] buffer = new byte[4];
+        int result = serialCon.read(buffer);
         return result;
     }
 
