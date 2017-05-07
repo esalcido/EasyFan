@@ -1,10 +1,11 @@
+#include <dht.h>
+
 
 #define RELAY1 7
 byte byteRead;
 
-#include <dht11.h>
 
-dht11 DHT;
+dht DHT;
 #define DHT11_PIN 6
 
 void setup() {
@@ -16,7 +17,7 @@ digitalWrite(RELAY1,1);
 
 int check;
 Serial.print("DHT11 Status  \t");
-check = DHT.read(DHT11_PIN);
+check = DHT.read11(DHT11_PIN);
 //check status
 switch (check)
 {
@@ -52,16 +53,24 @@ void loop() {
     Serial.println("Light off");
     
     }
+
+    if(byteRead==51){
+      Serial.println(DHT.humidity,1);
+    }
+    if(byteRead==52){
+      Serial.println(celToFaren(DHT.temperature));
+    }
+    
   }
   
   //humidity and temperature output
-Serial.print("Humidity is ");
+Serial.print("Humidity: ");
 Serial.print(DHT.humidity,1);
-Serial.print("\n");
-Serial.println("Temperature is ");
+//Serial.print("\n");
+Serial.print(".  Temperature: ");
 double result = DHT.temperature;
-Serial.println(result);
-Serial.println(celToFaren(result),1);
+
+Serial.println(celToFaren(result));
 
 
 //Serial.print("f temp: ");

@@ -23,17 +23,21 @@ public class RestService {
     @Path("/{state}")
     public Response getMsg(@PathParam("state") String state){
         String output = "toggle is: "+state;
+        String json="";
+        try {
+            if (state.equals("true")) {
+                rly.toggle("1");
+            } else
+                rly.toggle("0");
 
-        if(state.equals("true") ) {
-            rly.toggle("1");
+            System.out.println("state is: " + state);
+
+            //return Response.status(200).entity(state).build();
+            json = "{\"state\":\"" + state + "\"}";
+        }catch(Exception e){
+            System.out.println("error in restService");
         }
-        else
-            rly.toggle("0");
 
-        System.out.println("state is: "+ state);
-
-        //return Response.status(200).entity(state).build();
-        String json = "{\"state\":\""+state+"\"}";
         return Response.ok(json, MediaType.APPLICATION_JSON).build();
 
     }

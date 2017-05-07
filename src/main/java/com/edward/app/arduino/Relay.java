@@ -33,6 +33,7 @@ public class Relay {
             "COM5",
             "COM4",
             "COM3",
+            "COM8",
     };
 
     public Relay(){

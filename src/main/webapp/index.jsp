@@ -50,7 +50,7 @@
 
         <div ng-controller="myCtrl">
 
-            <h1> Fan: </h1>
+
 
            <!-- <button type="button" class="btn btn-info" ng-click="toggle()">Turn on</button>
             <br>
@@ -59,23 +59,40 @@
 
             <div class="btn-group" data-toggle="buttons">
                 <label class="btn btn-primary" ng-model="bigData.fan" uib-btn-checkbox>
-                    Fan
+                    LIGHT
                  </label>
-                 <label class="btn btn-primary" ng-model="bigData.another" uib-btn-checkbox>
+                 <!--<label class="btn btn-primary" ng-model="bigData.another" uib-btn-checkbox>
                                      another
-                                  </label>
+                                  </label>-->
 
-            </div> <pre><code>{{ bigData | json }}</code></pre>
-            <p>State: {{state}}</p>
+
+            </div>
+             <div class="row">
+             <div class="col-xs-4"></div>
+             </div>
+            <div id="appliance-results" class="container">
+                <div class="row">
+                    <div class="col-xs-4"></div>
+                    <div class="col-xs-4">
+
+                        <pre><code>{{ bigData | json }}</code></pre>
+                    </div>
+                    <div class="col-xs-4"></div>
+                </div>
+
+            </div>
+
+
+            <p>State:{{myWelcome}}</p>
         </div>
 
-        <div id="temp-data" class="col-lg-12" >
+      <!--  <div id="temp-data" class="col-lg-12" >
         <h3>DATA: </h3>
         <pre><code>
             <div id="temp" class="col-lg-6">temp: </div>
             <div id="humidity" class="col-lg-6">humidity: </div>
        </code> </pre>
-        </div>
+        </div>-->
 
 
       </div>
