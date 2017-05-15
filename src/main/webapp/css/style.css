@@ -1,0 +1,14 @@
+.clock {
+  display: block;
+  margin: 1em 0;
+  
+}
+.clock li{
+	background: #fff;
+}
+.clock-text { color:#fff; }
+.clock-time,
+code {
+  font-family: "Lucida Console", Monaco, monospace;
+  color:#fff;
+}

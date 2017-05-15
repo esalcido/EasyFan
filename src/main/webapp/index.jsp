@@ -10,6 +10,7 @@
 
   <link  rel="stylesheet" type="text/css" href="/webjars/bootstrap/3.3.1/css/bootstrap.min.css">
   <link href="/css/starter-template.css" rel="stylesheet">
+  <link href="/css/style.css" rel="stylesheet">
 
   <!--[if lt IE 9]>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
@@ -21,69 +22,69 @@
 
 <body ng-app="myApp">
 
- <nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Project Easy Fan</a>
+          <a class="navbar-brand" href="#">Project Flow Whole</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
             <li class="active"><a href="#">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <!-- <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li> -->
+            <li> <clock format="12" /></clock></li>
           </ul>
-        </div><!--/.nav-collapse -->
-      </div>
-    </nav>
+
+      </div><!--/.nav-collapse -->
+
+    </div>
+  </nav>
 
 <div class="container" >
 
       <div class="starter-template">
-        <h1>Easy Fan</h1>
-        <p class="lead">This is it! the easy fan project prototype 1.</p>
 
-        <div ng-controller="myCtrl">
+       <div  id="live data" class="row">
+        <div class="col-xs-2"></div>
+        <div class="col-xs-8">
+            <p> <h1>Live Data</h1></p>       
 
+             <div id="chart" class="col-xs-4" ng-controller="highChartCTLR">
+                <!-- <hc-pie-chart title="Temperature" data="pieData" > --><hc-pie-chart title="Temperature"  >Placeholder for generic chart</hc-pie-chart>
 
+               <!--  <hc-pie-chart class="col-xs-4" title="Humidity" data="pieData" >Placeholder for generic chart</hc-pie-chart> -->
 
-           <!-- <button type="button" class="btn btn-info" ng-click="toggle()">Turn on</button>
-            <br>
-            <p>{{ myWelcome }}</p>-->
-
-
-            <div class="btn-group" data-toggle="buttons">
-                <label class="btn btn-primary" ng-model="bigData.fan" uib-btn-checkbox>
-                    LIGHT
-                 </label>
-                 <!--<label class="btn btn-primary" ng-model="bigData.another" uib-btn-checkbox>
-                                     another
-                                  </label>-->
-
-
-            </div>
-             <div class="row">
-             <div class="col-xs-4"></div>
              </div>
-            <div id="appliance-results" class="container">
-                <div class="row">
-                    <div class="col-xs-4"></div>
-                    <div class="col-xs-4">
+        </div>
+        <div class="col-xs-2"></div>
 
-                        <pre><code>{{ bigData | json }}</code></pre>
-                    </div>
-                    <div class="col-xs-4"></div>
-                </div>
+       </div>
+       <div id="control" class="row">
+               <div class="col-xs-2"></div>
+               <div class="col-xs-8" >
+                <p> <h1>Control</h1></p>
+                    <div ng-controller="myCtrl">
+                               <div class="btn-group" data-toggle="buttons">
+                                   <label class="btn btn-primary" ng-model="bigData.light" uib-btn-checkbox>
+                                       LIGHT
+                                    </label>
+                                    <label class="btn btn-primary" ng-model="bigData.air" uib-btn-checkbox>
+                                       AIR
+                                    </label>
+                               </div>
 
-            </div>
-
-
-            <p>State:{{myWelcome}}</p>
+                               <div id="appliance-results" >
+                                       <pre><code>{{ bigData | json }}</code></pre>
+                                       <p>State:{{myWelcome}}</p>
+                               </div>
+               </div>
+               <div class="col-xs-2"></div>
         </div>
 
       <!--  <div id="temp-data" class="col-lg-12" >
@@ -104,6 +105,12 @@
 
 <script src="/webjars/angularjs/1.4.7/angular.min.js"></script>
 <script src="/webjars/angular-ui-bootstrap/2.2.0/ui-bootstrap.js"></script>
+<script src="/js/directives/directives.js"></script>
+<!-- link for highcharts -->
+ <script type="text/javascript" src="https://code.highcharts.com/highcharts.js"></script>
+ <script src="https://code.highcharts.com/highcharts-more.js"></script>
+ <script type="text/javascript" src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/solid-gauge.js"></script>
 <!--<script src="/webjars/bootstrap/3.3.1/js/bootstrap.min.js"></script>-->
 
 
