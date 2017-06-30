@@ -6,9 +6,9 @@
 .clock li{
 	background: #fff;
 }
-.clock-text { color:#fff; }
+.clock-text { color:#000; }
 .clock-time,
 code {
   font-family: "Lucida Console", Monaco, monospace;
-  color:#fff;
+  color:#000;
 }

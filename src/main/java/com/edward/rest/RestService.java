@@ -23,6 +23,7 @@ public class RestService {
     @Path("/{state}")
     public Response getMsg(@PathParam("state") String state){
         String output = "toggle is: "+state;
+
         String json="";
         try {
             if (state.equals("true")) {

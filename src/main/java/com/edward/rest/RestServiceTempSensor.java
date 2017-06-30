@@ -1,6 +1,7 @@
 package com.edward.rest;
 
 import com.edward.app.arduino.Relay;
+import com.edward.app.arduino.TempSensor;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -16,23 +17,27 @@ import javax.ws.rs.core.Response;
 @Path("/tempsensor")
 public class RestServiceTempSensor {
 
-    Relay rly = new Relay();
+    //Relay rly = new Relay();
+    TempSensor ts = new TempSensor();
+    int result =0;
 
     @GET
-    @Path("/{state}")
-    public Response getMsg(@PathParam("state") String state){
-        String output = "toggle is: "+state;
+    @Path("/{data}")
+    public Response getMsg(@PathParam("data") String data){
+        String output = "toggle is: "+data;
 
-        if(state.equals("true") ) {
-            rly.toggle("1");
+        if(data.equals("true") ) {
+           // rly.toggle("1");
+           result =  ts.getData("2");
         }
         else
-            rly.toggle("0");
+           // rly.toggle("0");
+            result = ts.getData("3");
 
-        System.out.println("state is: "+ state);
+        System.out.println("data is: "+ result);
 
         //return Response.status(200).entity(state).build();
-        String json = "{\"state\":\""+state+"\"}";
+        String json = "{\"state\":\""+result+"\"}";
         return Response.ok(json, MediaType.APPLICATION_JSON).build();
 
     }

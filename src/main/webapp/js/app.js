@@ -37,7 +37,7 @@ app.controller('myCtrl', function($scope,$http){
 });
 
 
-app.controller('highChartCTLR',function($scope){
+app.controller('highChartCTLR',function($scope,$timeout){
     $scope.chartOptions = {
         title:{
             text:'Temperature data'
@@ -61,7 +61,24 @@ $scope.minVal=0;
             // }];
 
         
-            
+      $timeout(function($scope){
+       $scope.chart = new Highcharts.Chart(chartConfig, function(chart) {
+       // chart.container.onclick = null;
+       // chart.container.onmousedown = null;
+       });
+       $scope.chart.reflow();
+    },2000);
+    
+    $scope.$watch('minVal', function(newVal) {
+          if ($scope.chart) {
+           $scope.chart.yAxis[0].update({
+              min : newVal
+           }, true);
+           }
+           });
+
+
+
 });
 
 
@@ -190,7 +207,7 @@ app.directive('hcPieChart', function () {
 
                 series: [{
                     name: 'Speed',
-                    data: [80],
+                    data: [10],
                     tooltip: {
                         valueSuffix: ' km/h'
                     }

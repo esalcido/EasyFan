@@ -37,8 +37,9 @@
           <ul class="nav navbar-nav">
             <li class="active"><a href="#">Home</a></li>
             <!-- <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li> -->
+            <li><a href="#contact">Contact</a></li> 
             <li> <clock format="12" /></clock></li>
+          -->
           </ul>
 
       </div><!--/.nav-collapse -->
@@ -50,51 +51,84 @@
 
       <div class="starter-template">
 
-       <div  id="live data" class="row">
+      <div id="date-time" class="row">
         <div class="col-xs-2"></div>
         <div class="col-xs-8">
-            <p> <h1>Live Data</h1></p>       
-
-             <div id="chart" class="col-xs-4" ng-controller="highChartCTLR">
-                <!-- <hc-pie-chart title="Temperature" data="pieData" > --><hc-pie-chart title="Temperature"  >Placeholder for generic chart</hc-pie-chart>
-
-               <!--  <hc-pie-chart class="col-xs-4" title="Humidity" data="pieData" >Placeholder for generic chart</hc-pie-chart> -->
-
-             </div>
+          <h3 style="color:#000"><clock format="12" /></clock></h3>
         </div>
         <div class="col-xs-2"></div>
+        
+      </div>
 
-       </div>
-       <div id="control" class="row">
+
+       <div  id="live data" class="row">
+        <div class="col-xs-2"></div>
+        <div class="col-xs-8" ng-controller="highChartCTLR">
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+            <p> <h1>Live Data</h1></p> 
+            </div>
+            <div class="panel-body">      
+              <div id="chart" class="col-xs-6" >
+                <!-- <hc-pie-chart title="Temperature"  >Placeholder for generic chart</hc-pie-chart> -->
+                <h3>Temperature</h3>
+                <div >
+                    <img src="/assets/thermometer-medical-fever-temperature-control-tool_318-61723.jpg"  width="50" height="50" />
+                    <h2>80 &deg; F</h2>
+                </div>
+              </div>
+
+              <div id="humidity" class="col-xs-6" >
+                <h3>Humidity</h3>
+                <div>
+                <img src="/assets/Science-Humidity-icon.png"  width="50" height="50" />
+                </div>
+                <div >
+                    <h2>27 %</h2>
+                </div>
+              </div>
+
+
+              
+         </div>
+        <div class="col-xs-2"></div>
+
+       </div><!--end row-->
+
+
+
+       <div id="control" class="row" ng-controller="myCtrl">
                <div class="col-xs-2"></div>
                <div class="col-xs-8" >
-                <p> <h1>Control</h1></p>
-                    <div ng-controller="myCtrl">
-                               <div class="btn-group" data-toggle="buttons">
-                                   <label class="btn btn-primary" ng-model="bigData.light" uib-btn-checkbox>
-                                       LIGHT
-                                    </label>
-                                    <label class="btn btn-primary" ng-model="bigData.air" uib-btn-checkbox>
-                                       AIR
-                                    </label>
-                               </div>
+                
+                <div class="panel panel-primary">
+                  <div class="panel-heading">
+                    <p> <h1>Control</h1></p></div>
+                    <div class="panel-body">  
+                          <div >
+                                     <div class="btn-group" data-toggle="buttons">
+                                        <div class="btn btn-primary" ng-model="bigData.light" uib-btn-checkbox>
+                                         <img src="/assets/light-bulb-outline_318-49895.png"  width="50" height="50" />
+                                         <label  >
+                                             LIGHT
+                                          </label>
+                                        </div>
+                                        <div class="btn btn-primary" ng-model="bigData.air" uib-btn-checkbox>
+                                          <img src="/assets/air_conditioning_external-512.png"  width="50" height="50" />
+                                          <label  >
+                                             AIR
+                                          </label>
+                                        </div>
+                                     </div>
 
-                               <div id="appliance-results" >
-                                       <pre><code>{{ bigData | json }}</code></pre>
-                                       <p>State:{{myWelcome}}</p>
-                               </div>
+                                     <div id="appliance-results" >
+                                             <pre><code>{{ bigData | json }}</code></pre>
+                                             <p>State:{{myWelcome}}</p>
+                                     </div>
+                          </div>
                </div>
                <div class="col-xs-2"></div>
         </div>
-
-      <!--  <div id="temp-data" class="col-lg-12" >
-        <h3>DATA: </h3>
-        <pre><code>
-            <div id="temp" class="col-lg-6">temp: </div>
-            <div id="humidity" class="col-lg-6">humidity: </div>
-       </code> </pre>
-        </div>-->
-
 
       </div>
     </div><!-- /.container -->
