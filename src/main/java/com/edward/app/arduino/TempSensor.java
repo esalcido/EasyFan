@@ -64,6 +64,11 @@ public class TempSensor {
 
     }
 
+    public  int getData(String st){
+        //TODO work on this to get data from the arduino
+        return 1;
+    }
+
 
 
 }
