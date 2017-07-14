@@ -29,7 +29,9 @@ public class Relay {
     private static final String PORT_NAMES[]={
             "/dev/tty.usbserial-A9007UX1",
             "/dev/ttyACM0",
+            "/dev/ttyACM1",
             "/dev/ttyUSB0",
+            "/dev/ttyUSB1",
             "COM5",
             "COM4",
             "COM3",

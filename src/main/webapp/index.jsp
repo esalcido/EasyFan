@@ -145,7 +145,7 @@
  <script src="https://code.highcharts.com/highcharts-more.js"></script>
  <script type="text/javascript" src="https://code.highcharts.com/modules/exporting.js"></script>
 <script src="https://code.highcharts.com/modules/solid-gauge.js"></script>
-<!--<script src="/webjars/bootstrap/3.3.1/js/bootstrap.min.js"></script>-->
+<!--<script src="/EasyFan/webjars/bootstrap/3.3.1/js/bootstrap.min.js"></script>-->
 
 
 
