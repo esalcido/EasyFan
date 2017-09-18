@@ -29,9 +29,7 @@ public class Relay {
     private static final String PORT_NAMES[]={
             "/dev/tty.usbserial-A9007UX1",
             "/dev/ttyACM0",
-            "/dev/ttyACM1",
             "/dev/ttyUSB0",
-            "/dev/ttyUSB1",
             "COM5",
             "COM4",
             "COM3",
@@ -62,7 +60,7 @@ public class Relay {
        // port = "COM5";
 
         port = currPortId.getName();
-        System.out.println("port");
+        System.out.println("port " + port);
         baudRate = 9600;
         serial = new NRSerialPort(port, baudRate);
 
