@@ -37,7 +37,7 @@ public class Relay {
     };
 
     public Relay(){
-
+        System.setProperty("gnu.io.rxtx.SerialPorts", "COM6");
         //get port from system
         CommPortIdentifier portId=null;
         Enumeration portEnum =CommPortIdentifier.getPortIdentifiers();
@@ -56,10 +56,9 @@ public class Relay {
         }
         }
 
+        port = "COM6";
 
-       // port = "COM5";
-
-        port = currPortId.getName();
+        //port = currPortId.getName();
         System.out.println("port " + port);
         baudRate = 9600;
         serial = new NRSerialPort(port, baudRate);

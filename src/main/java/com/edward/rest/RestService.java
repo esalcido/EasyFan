@@ -22,7 +22,7 @@ public class RestService {
     @GET
     @Path("/{state}")
     public Response getMsg(@PathParam("state") String state){
-        String output = "toggle is: "+state;
+        String output = "RELAY: toggle is: "+state;
 
         String json="";
         try {
@@ -30,7 +30,6 @@ public class RestService {
                 rly.toggle("1");
             } else
                 rly.toggle("0");
-
             System.out.println("state is: " + state);
 
             //return Response.status(200).entity(state).build();
