@@ -2,7 +2,7 @@
 #include <dht.h>
 
 dht DHT;
-#define DHT11_PIN 6
+#define DHT11_PIN 3
 
 void DHTSetup() {
 
