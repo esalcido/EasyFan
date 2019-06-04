@@ -27,19 +27,25 @@ int check;
   }
   
 }
+void printDHT1(){
+  //humidity and temperature output
+  Serial.print("Humidity: ");
+  Serial.print(DHT.humidity,1);
+ 
+  Serial.print(".  Temperature: ");
+  double result = DHT.temperature;
+  
+  Serial.println(celToFaren(result));
 
+  
+  
+}
 
-void DHTLoop(byte br){
-
- if(br==50){
-      Serial.print("Humidity: ");
-      Serial.println(DHT.humidity,1);
-    }
-    if(br==51){
-      Serial.print("temp: ");
+void DHTLoop(String br){
+//Serial.print("Humidity: ");
+      Serial.println(DHT.humidity);
+//Serial.print("temp: ");
       Serial.println(celToFaren(DHT.temperature));
-    }
-
     
 }
 

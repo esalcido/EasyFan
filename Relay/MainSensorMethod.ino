@@ -63,16 +63,26 @@ void loop() {
       relay(rel,state1);
       readString = "";
     }
-   else{
-      hygroLoop(readString );
+    if(command.equals("s")){
+      Serial.print("soil");
+       hygroLoop(readString );
+
+       readString = "";
+    }
+   if(command.equals("t")){
+     Serial.print("temp");
+      DHTLoop(readString);
+
       readString = "";
    }
 
   }
+printDHT1();
+  printHygro();
 // 
 //   //relayLoop( byteRead);
 //
-//   //DHTLoop(byteRead);
+   //DHTLoop(byteRead);
 //
 //hygroLoop(byteRead);
 //
@@ -80,7 +90,7 @@ void loop() {
 //    
 //  }
   
- // printDHT();
+ 
   
   delay(1000);
  
@@ -90,10 +100,12 @@ void printDHT(){
   //humidity and temperature output
   Serial.print("Humidity: ");
   Serial.print(DHT.humidity,1);
-  //Serial.print("\n");
+ 
   Serial.print(".  Temperature: ");
   double result = DHT.temperature;
   
   Serial.println(celToFaren(result));
+
+  
   
 }
