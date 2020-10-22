@@ -41,37 +41,37 @@ void printHygro(){
  value= constrain(value,400,1023);
  value= map(value,400,1023,100,0);
 
- value2= analogRead(H2);
- value2= constrain(value2,400,1023);
- value2= map(value2,400,1023,100,0);
- 
- value3= analogRead(H3);
- value3= constrain(value3,400,1023);
- value3= map(value3,400,1023,100,0);
-
- value4= analogRead(H4);
- value4= constrain(value4,400,1023);
- value4= map(value4,400,1023,100,0);
-
- 
+// value2= analogRead(H2);
+// value2= constrain(value2,400,1023);
+// value2= map(value2,400,1023,100,0);
+// 
+// value3= analogRead(H3);
+// value3= constrain(value3,400,1023);
+// value3= map(value3,400,1023,100,0);
+//
+// value4= analogRead(H4);
+// value4= constrain(value4,400,1023);
+// value4= map(value4,400,1023,100,0);
+//
+// 
  Serial.print("H1: ");
  Serial.print(value);
  Serial.print("% \t");
 
- Serial.print("H2: ");
- Serial.print(value2);
- Serial.print("% \t");
-
- 
- Serial.print("H3: ");
- Serial.print(value3);
- Serial.print("% \t");
- 
- 
- Serial.print("H4: ");
- Serial.print(value4);
- Serial.println("% ");
- delay(10000);
+// Serial.print("H2: ");
+// Serial.print(value2);
+// Serial.print("% \t");
+//
+// 
+// Serial.print("H3: ");
+// Serial.print(value3);
+// Serial.print("% \t");
+// 
+// 
+// Serial.print("H4: ");
+// Serial.print(value4);
+// Serial.println("% ");
+ delay(1000);
 }
 
 void hygroLoop(String br){
@@ -123,7 +123,7 @@ Serial.print("H2: ");
  Serial.print("H4: ");
  Serial.print(value4);
  Serial.println("% ");
- delay(10000);
+ delay(1000);
 
     
 }

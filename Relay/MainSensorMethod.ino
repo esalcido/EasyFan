@@ -20,7 +20,7 @@ int ind4;
 
 void setup() {
   // put your setup code here, to run once:
-  Serial.begin(9600);
+  Serial.begin(115200);
 
   relaySetup();
 
@@ -31,7 +31,8 @@ void setup() {
 }
 
 void loop() {
- 
+
+
   // put your main code here, to run repeatedly:
 
   while(Serial.available() ){
@@ -45,22 +46,38 @@ void loop() {
   }
 
   if(readString.length() >0){
-    Serial.println(readString);
+    //Serial.println(readString);
 
 
     command = readString.substring(0,1);
     rel =     readString.substring(2,3).toInt();
     state1 =  readString.substring(4,5).toInt();
+
+    if(command.equals("a")){
+       String json = "{";
+      //get relay json
+      json+= relay_states();
+      json+=",";
+       //get temperature json
+      json+=getTemp();
+      //json+=",";
+      json+="}";
+     Serial.println(json);
+     Serial.flush();
+     
+      readString = "";
+    }
     
     if(command.equals("r")){
-      Serial.print("command: ");
-      Serial.println(command);
-      Serial.print("rel: ");
-      Serial.println(String(rel));
-      Serial.print("state: ");
-      Serial.println(state1);
+//      Serial.print("command: ");
+//      Serial.println(command);
+//      Serial.print("rel: ");
+//      Serial.println(String(rel));
+//      Serial.print("state: ");
+//      Serial.println(state1);
       
-      relay(rel,state1);
+      String result = relay(rel,state1);
+      Serial.println(result);
       readString = "";
     }
     if(command.equals("s")){
@@ -70,42 +87,36 @@ void loop() {
        readString = "";
     }
    if(command.equals("t")){
-     Serial.print("temp");
-      DHTLoop(readString);
+     String result = getTemp();
+     Serial.println(result);
+      readString = "";
+   }
+   if(command.equals("c")){
+      getTempC(readString);
 
       readString = "";
    }
+   if(command.equals("h")){
+      getHumidity(readString);
 
+      readString = "";
+   }
+   
+   if(command.equals("u")){
+     //Serial.print("temp");
+      int rs = relay_state(rel);
+      
+      Serial.println(rs);
+      readString = "";
+   }
+
+    if(command.equals("v")){
+     //Serial.print("temp");
+      String rs = relay_states();
+      
+      Serial.println(rs);
+      readString = "";
+   }
   }
-printDHT1();
-  printHygro();
-// 
-//   //relayLoop( byteRead);
-//
-   //DHTLoop(byteRead);
-//
-//hygroLoop(byteRead);
-//
-//   
-//    
-//  }
-  
  
-  
-  delay(1000);
- 
-}
-
-void printDHT(){
-  //humidity and temperature output
-  Serial.print("Humidity: ");
-  Serial.print(DHT.humidity,1);
- 
-  Serial.print(".  Temperature: ");
-  double result = DHT.temperature;
-  
-  Serial.println(celToFaren(result));
-
-  
-  
 }

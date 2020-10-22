@@ -42,13 +42,49 @@ void printDHT1(){
 }
 
 void DHTLoop(String br){
-//Serial.print("Humidity: ");
+int check = DHT.read(DHT11_PIN);
+double result = DHT.temperature;
+      Serial.print(celToFaren(result));
+      Serial.print(" F | ");
+      Serial.print(result);
+      Serial.println(" C");
+      Serial.print("Humidity: ");
       Serial.println(DHT.humidity);
-//Serial.print("temp: ");
-      Serial.println(celToFaren(DHT.temperature));
-    
+      result=0;
 }
 
+String getTemp(){
+  int check = DHT.read(DHT11_PIN);
+ 
+  double tempC = DHT.temperature;
+   double tempF = celToFaren(tempC);
+  double humid = DHT.humidity;
+  
+  String result="{\"temperature\":";
+  result +="{ \"farenheit\":\""+ String(tempF)+"\",\"celcius\": \""+String(tempC)+"\",\"humidity\": \""+ String(humid)+"\" } }";
+  //result+=",";
+  return result;
+}
+
+double getTempF(String br){
+  int check = DHT.read(DHT11_PIN);
+  double result = DHT.temperature;
+  //Serial.println(celToFaren(result));
+  result = celToFaren(result);
+  return result;
+}
+double getTempC(String br){
+  int check = DHT.read(DHT11_PIN);
+  double result = DHT.temperature;
+  //Serial.println(result);
+  return result;
+}
+double getHumidity(String br){
+  int check = DHT.read(DHT11_PIN);
+  double result = DHT.humidity;
+  //Serial.println(result);
+  return result;
+}
 
 
 int celToFaren(double value){
