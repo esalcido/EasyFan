@@ -1,5 +1,3 @@
-
-
 #define r1 12
 #define r2 11
 #define r3 10
@@ -80,12 +78,19 @@ String relay(int relayNum, int state){
     state=0;
     relayStates[relayNum]=0;
   }
+
+  
   String relayData = "{\"relayNum\":\"";
   relayData+=String(relayNum);
   relayData+="\",\"state\":\"";
   relayData+=String(state);
   relayData+="\"}";
-  return relayData;
+
+ 
+  //return relayData;
+ 
+  
+  return relay_states();
 }
 
 int relay_state(int relayNum){

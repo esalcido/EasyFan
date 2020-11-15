@@ -1,3 +1,10 @@
+#include <TempSensor.h>
+#include <CapacitiveSoilSensor.h>
+
+TempSensor tempSensor1(3);
+TempSensor tempSensor2(4);
+
+CapacitiveSoilSensor soil(A0);
 
 char byteRead;
 String serialResponse = "", relayNum, state;//130,hi,7.2,389*
@@ -22,9 +29,12 @@ void setup() {
   // put your setup code here, to run once:
   Serial.begin(115200);
 
+  tempSensor1.setup();
+  tempSensor2.setup();
+  
   relaySetup();
 
-  DHTSetup();
+//  DHTSetup();
 
  hygroSetup();
 
@@ -46,38 +56,42 @@ void loop() {
   }
 
   if(readString.length() >0){
-    //Serial.println(readString);
-
 
     command = readString.substring(0,1);
     rel =     readString.substring(2,3).toInt();
     state1 =  readString.substring(4,5).toInt();
 
     if(command.equals("a")){
-       String json = "{";
+       String json = "[{";
+      
       //get relay json
       json+= relay_states();
       json+=",";
-       //get temperature json
-      json+=getTemp();
-      //json+=",";
-      json+="}";
+
+      //get temp sensor data and format
+      String result = tempSensor1.getTemp();
+      String result2 = tempSensor2.getTemp();
+      String jsonString = "\"temps\":[";
+      jsonString+=result+","+result2;
+      jsonString+="]";
+      //get temperature json
+      //json+=getTemp();
+      json+=jsonString;
+      
+      json+="}]";
      Serial.println(json);
-     Serial.flush();
+     //Serial.flush();
      
       readString = "";
     }
     
     if(command.equals("r")){
-//      Serial.print("command: ");
-//      Serial.println(command);
-//      Serial.print("rel: ");
-//      Serial.println(String(rel));
-//      Serial.print("state: ");
-//      Serial.println(state1);
       
       String result = relay(rel,state1);
-      Serial.println(result);
+
+      
+      
+     // Serial.println(result);
       readString = "";
     }
     if(command.equals("s")){
@@ -87,9 +101,19 @@ void loop() {
        readString = "";
     }
    if(command.equals("t")){
-     String result = getTemp();
-     Serial.println(result);
-      readString = "";
+    
+     String result = tempSensor1.getTemp();
+     String result2 = tempSensor2.getTemp();
+     String json = "[";
+     
+     json+=result+","+result2;
+     json+="]";
+      Serial.println(json);     
+//     Serial.println(result);
+//     Serial.println(" ");
+//     Serial.println(result2);
+
+     readString = "";
    }
    if(command.equals("c")){
       getTempC(readString);
@@ -104,9 +128,12 @@ void loop() {
    
    if(command.equals("u")){
      //Serial.print("temp");
-      int rs = relay_state(rel);
-      
-      Serial.println(rs);
+     
+      String rs = relay_states();
+     String rs1 = "{";
+     rs1+=rs;
+     rs1+="}"; 
+      Serial.println(rs1);
       readString = "";
    }
 
@@ -118,5 +145,40 @@ void loop() {
       readString = "";
    }
   }
+
+String json = "[{";
+      
+      //get relay data
+      json+= relay_states();
+      json+=",";
+
+      //get temp sensor data and format
+      String result = tempSensor1.getTemp();
+      String result2 = tempSensor2.getTemp();
+      String jsonString = "\"temps\":[";
+      jsonString+=result+","+result2;
+      jsonString+="]";
+      
+      //get temperature jsons
+      json+=jsonString;
+
+      //get soil reading
+      String soilData = ",\"soil\":";
+      int sd = soil.getMoistureValue();
+      soilData += sd;
+//      soilData+="]";
+      json+=soilData;
+
+      
+      json+="}]";
+      
+      //Print All json data
+     Serial.println(json);
+
+//     int soilValue = soil.getMoistureValue();
+//     Serial.println(soilValue);
+
+     delay(2000);
+
  
 }
